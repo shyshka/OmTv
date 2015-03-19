@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmTV", "OmTV\OmTV.csproj", "{2F8BE050-A5E0-4C38-8423-5C338FE0CC9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F8BE050-A5E0-4C38-8423-5C338FE0CC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8BE050-A5E0-4C38-8423-5C338FE0CC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8BE050-A5E0-4C38-8423-5C338FE0CC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8BE050-A5E0-4C38-8423-5C338FE0CC9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = OmTV\OmTV.csproj
+	EndGlobalSection
+EndGlobal
