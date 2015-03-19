@@ -45,7 +45,10 @@ namespace OmTV
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int action_menu = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Icon = 2130837505;
 			
 			static Drawable()
 			{
@@ -61,19 +64,37 @@ namespace OmTV
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int btnShowPlaylists = 2131034112;
-			
-			// aapt resource value: 0x7f050001
-			public const int btnShowVideos = 2131034113;
-			
-			// aapt resource value: 0x7f050002
-			public const int iView = 2131034114;
-			
-			// aapt resource value: 0x7f050004
-			public const int lViewPlaylist = 2131034116;
+			public const int FlyOutContainer = 2131034112;
 			
 			// aapt resource value: 0x7f050003
-			public const int tViewTitle = 2131034115;
+			public const int FlyOutContent = 2131034115;
+			
+			// aapt resource value: 0x7f050008
+			public const int FlyOutMenu = 2131034120;
+			
+			// aapt resource value: 0x7f050005
+			public const int MenuButton = 2131034117;
+			
+			// aapt resource value: 0x7f050001
+			public const int iView = 2131034113;
+			
+			// aapt resource value: 0x7f050007
+			public const int lViewPlaylist = 2131034119;
+			
+			// aapt resource value: 0x7f050009
+			public const int layoutExit = 2131034121;
+			
+			// aapt resource value: 0x7f050004
+			public const int linearLayout1 = 2131034116;
+			
+			// aapt resource value: 0x7f05000a
+			public const int tViewPlaylistTitle = 2131034122;
+			
+			// aapt resource value: 0x7f050002
+			public const int tViewTitle = 2131034114;
+			
+			// aapt resource value: 0x7f050006
+			public const int textView2 = 2131034118;
 			
 			static Id()
 			{
@@ -92,13 +113,19 @@ namespace OmTV
 			public const int Main = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int PlaylistItem = 2130903041;
+			public const int MainVideos = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Playlists = 2130903042;
+			public const int PlaylistItem = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Videos = 2130903043;
+			public const int Playlists = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int SlideMenu = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int Videos = 2130903045;
 			
 			static Layout()
 			{

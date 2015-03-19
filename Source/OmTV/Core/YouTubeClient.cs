@@ -76,11 +76,21 @@ namespace OmTV
 					listRequest.ChannelId = CommonData.ChannelId;
 					listRequest.MaxResults = 5;
 					listRequest.PageToken = nextPageToken;
+					try{
 					var listResponse = listRequest.Execute ();
-					CommonData.LstPlaylists.AddRange (listResponse.Items);
+						foreach (var item in listResponse.Items)
+							GetBitmapFromUrl(item.Snippet.Thumbnails.Default.Url);
+						CommonData.LstPlaylists.AddRange (listResponse.Items);
+						nextPageToken = listResponse.NextPageToken;
+					}
+					catch
+					{
+						CommonEvents.RaiseOnLoadEnded();
+						CommonEvents.RaiseOnMessage("Не вдалося завантажити дані.\nПеревірте з'єднання з Internet");
+						return;
+					}
 					CommonEvents.RaiseOnLstPlaylistsChanged ();
-					nextPageToken = listResponse.NextPageToken;
-				}			
+				}
 				CommonEvents.RaiseOnLoadEnded();
 			})).Start ();
 		}

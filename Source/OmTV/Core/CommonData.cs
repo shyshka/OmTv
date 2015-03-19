@@ -24,6 +24,7 @@ namespace OmTV
 		public static readonly string ChannelId = "UCkp0Tc7ll67bChomTyB1ezQ";		
 		public static readonly string StrSnippet = "snippet";
 		public static readonly string StrContent = "content";
+		public static readonly string StrPlaylistName = "playlistName";
 
 		public static List<Playlist> LstPlaylists{ get; set; }		
 		public static List<PlaylistItem> LstPlaylistItems{ get; set; }

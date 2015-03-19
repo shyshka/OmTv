@@ -1,18 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="OmTV\Core\YouTubeClient.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="OmTV\MainActivity.cs">
     <Files>
-      <File FileName="OmTV\PlaylistsActivity.cs" Line="10" Column="22" />
-      <File FileName="OmTV\Core\YouTubeClient.cs" Line="52" Column="61" />
+      <File FileName="OmTV\VideosActivity.cs" Line="1" Column="1" />
+      <File FileName="OmTV\Core\YouTubeClient.cs" Line="90" Column="14" />
+      <File FileName="OmTV\MainActivity.cs" Line="30" Column="8" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="OmTV" expanded="True">
-            <Node name="Core" expanded="True">
-              <Node name="YouTubeClient.cs" selected="True" />
-            </Node>
+            <Node name="Core" expanded="True" />
             <Node name="Resources" expanded="True" />
+            <Node name="MainActivity.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -25,5 +25,5 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.OmTV MonoForAntroid.PreferredDevice="3.7in WVGA (Nexus One)" AndroidDeviceId-Release="192.168.56.101:5555" AndroidDeviceId-Debug="192.168.56.101:5555" />
+  <MonoDevelop.Ide.ItemProperties.OmTV MonoForAntroid.PreferredDevice="3.7in WVGA (Nexus One)" AndroidDeviceId-Release="192.168.56.101:5555" AndroidDeviceId-Debug="192.168.56.101:5555" MonoForAntroid.PreferredTheme="Theme.DeviceDefault" />
 </Properties>

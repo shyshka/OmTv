@@ -15,7 +15,7 @@
         p1:layout_weight="3"
         p1:layout_margin="5dp">
         <ImageView
-            p1:src="@null"
+            p1:src="@drawable/Icon"
             p1:id="@+id/iView"
             p1:layout_width="match_parent"
             p1:layout_height="match_parent"

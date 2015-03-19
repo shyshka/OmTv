@@ -58,17 +58,11 @@
     <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\icon1.png" />
     <AndroidResource Include="Resources\drawable\icon1.png" />
     <AndroidResource Include="Resources\drawable\iconelse.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\iconelse.png" />
     <AndroidResource Include="Resources\layout\MenuLayout.axml" />
     <AndroidResource Include="Resources\layout\ContentLayout.axml" />
     <AndroidResource Include="Resources\drawable\action_menu.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\action_menu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Resources\drawable-xhdpi\" />
-  </ItemGroup>
 </Project>

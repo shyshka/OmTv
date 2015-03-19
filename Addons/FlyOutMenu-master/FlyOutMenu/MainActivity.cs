@@ -24,6 +24,8 @@ namespace FlyOutMenu
 			menuButton.Click += (sender, e) => {
 				menu.AnimatedOpened = !menu.AnimatedOpened;
 			};
+
+
 		}
 	}
 }
