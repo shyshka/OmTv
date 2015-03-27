@@ -7,7 +7,7 @@
     android:id="@+id/FlyOutMenu"
     android:padding="4dp">
     <TextView
-        android:text="Налаштування"
+        android:text="Опції"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -24,20 +24,23 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:id="@+id/writeMeBtn">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:minWidth="25dp"
-            android:minHeight="25dp" />
+            android:minHeight="25dp"
+            android:src="@drawable/Letter" />
         <TextView
             android:text="Написати"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
-            android:textColor="#fff8f8f8" />
+            android:textColor="#fff8f8f8"
+            android:gravity="center_vertical" />
     </LinearLayout>
     <View
         android:layout_width="fill_parent"
@@ -51,20 +54,22 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:id="@+id/aboutBtn">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:minWidth="25dp"
-            android:minHeight="25dp" />
+            android:minHeight="25dp"
+            android:src="@drawable/About" />
         <TextView
-            android:text="Поділитися"
+            android:text="Про нас"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
-            android:textColor="#fff8f8f8" />
+            android:textColor="#fff8f8f8"
+            android:gravity="center_vertical" />
     </LinearLayout>
     <View
         android:layout_width="fill_parent"
@@ -81,17 +86,20 @@
         android:layout_margin="5dp"
         android:id="@+id/layoutExit">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:minWidth="25dp"
-            android:minHeight="25dp" />
+            android:minHeight="25dp"
+            android:src="@drawable/Exit" />
         <TextView
             android:text="Вихід"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
-            android:textColor="#fff8f8f8" />
+            android:textColor="#fff8f8f8"
+            android:id="@+id/exitBack"
+            android:gravity="center_vertical" />
     </LinearLayout>
 </LinearLayout>
