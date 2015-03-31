@@ -1,28 +1,31 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using System.Threading;
-using Android.Views.Animations;
+using Android.OS;
+using Android.Content;
 
 namespace OmTV
 {
 	[Activity (Label = "OmTV", MainLauncher = true)]			
 	public class MainActivity : Activity
 	{
-		private ListView lViewPlaylistCollection;
+		private ListView lViewCollection;
 		private AlertDialog dlg;
+        private PlaylistCollection items;
 
 		protected override void OnCreate (Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.MainContainer);
+
+            this.StartService (new Intent (this, typeof(OmTVService)));
+
+            items = PlaylistCollection.CreateNewInstance();
+            items.DataChanged += delegate
+            {
+                RunOnUiThread(delegate {
+                    (lViewCollection.Adapter as BaseAdapter).NotifyDataSetChanged();   
+                });
+            };
 
             dlg = CommonVoids.InitLoadingDialog(this);
 
@@ -31,7 +34,7 @@ namespace OmTV
             var btnExit = container.FindViewById<LinearLayout>(Resource.Id.layoutExit);
             btnExit.Click += delegate
             {
-                CommonVoids.ExitApp();
+                this.Finish();
             };
 
             var btnMenu = FindViewById(Resource.Id.MenuButton);
@@ -43,12 +46,16 @@ namespace OmTV
             var btnRefresh = FindViewById(Resource.Id.RefreshButton);
             btnRefresh.Click += (sender, e) =>
             {
-                var desData = YoutubeClient.DeserializeData();
-                if (desData != null)
-                    YoutubeClient.PlaylistCollection = desData;
+                var res = PlaylistCollection.LoadInstance();
+                if (res == null)
+                    items.GetDataAsync();
                 else
-                    YoutubeClient.LoadPlaylistCollectionAsync();   
-                YoutubeClient.UpdatelistCollection();          
+                {
+                    items.Clear();
+                    items.AddRange(res);
+                    (lViewCollection.Adapter as BaseAdapter).NotifyDataSetChanged();
+                    items.UpdateDataAsync();          
+                }                 
             };
 
             var btnWriteLetter = FindViewById(Resource.Id.writeMeBtn);
@@ -57,21 +64,22 @@ namespace OmTV
                 CommonVoids.WriteLetter(this);
             };	
 
-            var aboutBtn = FindViewById(Resource.Id.aboutBtn);
-            aboutBtn.Click += delegate
+            var btnAbout = FindViewById(Resource.Id.aboutBtn);
+            btnAbout.Click += delegate
             {
                 Intent intent = new Intent(this, typeof(About));
                 intent.SetFlags(ActivityFlags.NewTask);
                 StartActivity(intent);
             };
 
-            lViewPlaylistCollection = FindViewById<ListView>(Resource.Id.lViewPlaylist);
-            lViewPlaylistCollection.ItemClick += (obj, arg) =>
+            lViewCollection = FindViewById<ListView>(Resource.Id.lViewPlaylist);
+            lViewCollection.Adapter = new PlaylistAdapter(this, items);
+            lViewCollection.ItemClick += (obj, arg) =>
             {
                 Intent intent = new Intent(this, typeof(VideosActivity));
                 intent.AddFlags(ActivityFlags.NewTask);
-                intent.PutExtra(CommonStrings.StrContent, (lViewPlaylistCollection.Adapter as PlaylistItemAdapter).Items[arg.Position].Id);
-                intent.PutExtra(CommonStrings.StrPlaylistName, (lViewPlaylistCollection.Adapter as PlaylistItemAdapter).Items[arg.Position].Snippet.Title);
+                intent.PutExtra(CommonStrings.StrContent, (lViewCollection.Adapter as PlaylistAdapter).Items[arg.Position].Id);
+                intent.PutExtra(CommonStrings.StrPlaylistName, (lViewCollection.Adapter as PlaylistAdapter).Items[arg.Position].Snippet.Title);
                 StartActivity(intent);
             };
 
@@ -83,20 +91,13 @@ namespace OmTV
                 {
                     Toast.MakeText(this, arg.Value, ToastLength.Long).Show();
                 });
-            };
-
-            CommonEvents.OnPlaylistCollectionChanged += delegate
-            {
-                RunOnUiThread(delegate
-                {
-                    lViewPlaylistCollection.Adapter = new PlaylistItemAdapter(this, YoutubeClient.PlaylistCollection);
-                });
-            };
+            };           
 
             CommonEvents.OnLoadStarted += delegate
             {
                 RunOnUiThread(delegate
                 {
+                    dlg.Show();
                     btnRefresh.StartAnimation(CommonVoids.InitRotateAnimation());	
                 });
             };	
@@ -105,15 +106,10 @@ namespace OmTV
             {
                 RunOnUiThread(delegate
                 {
-                    try
-                    {
-                        btnRefresh.Animation = null;                       
-                    }
-                    catch
-                    {
-                    }		
+                    dlg.Hide();
+                    btnRefresh.Animation = null;                                           		
                 });
-            };
+            };           
 
             btnRefresh.CallOnClick();           
         }

@@ -22,11 +22,14 @@ namespace OmTV
 		public static readonly string StrSnippet = "snippet";
 		public static readonly string StrContent = "content";
 		public static readonly string StrPlaylistName = "playlistName";
+        public static string StrPlaylistDataFilePath { get { return @"/mnt/sdcard/json/playlists.json"; } }
+        public static string StrDataDirPath { get { return @"/mnt/sdcard/json/"; } }
 
+        public static readonly string StrUpdate = "Дані оновлено";
 		public static readonly string StrErrorInternet = "Не вдалося завантажити дані.\nПеревірте з'єднання з Internet";
 		public static readonly string StrSendLetter = "Відправка листа...";
 		public static readonly string StrLoading = "Завантаження даних...";
+        public static readonly string StrNewVideos = "На каналі OmTV з'явилися нові відео...";
 		public static readonly string AppName = "OmTV";
 	}
 }
-

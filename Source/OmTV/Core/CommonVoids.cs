@@ -59,6 +59,7 @@ namespace OmTV
 
 		public static AlertDialog InitLoadingDialog(Context cont){
 			var builder = new AlertDialog.Builder (cont);
+            builder.SetIcon(Resource.Drawable.Icon);
 			builder.SetTitle (CommonStrings.AppName);
 			builder.SetMessage (CommonStrings.StrLoading);
 			builder.SetCancelable (false);
@@ -78,6 +79,30 @@ namespace OmTV
 			anim.Duration = 700;
 			return anim;
 		}
+
+        public static void ShowNotification(Context cont,int count)
+        {
+            Intent intent = new Intent (cont, typeof(MainActivity));
+
+            const int pendingIntentId = 0;
+            PendingIntent pendingIntent = 
+                PendingIntent.GetActivity (cont, pendingIntentId, intent, PendingIntentFlags.OneShot);
+
+            Notification.Builder builder = new Notification.Builder(cont)
+                .SetContentIntent (pendingIntent)
+                    .SetContentTitle (string.Format("{0} +{1}",CommonStrings.AppName,count))
+                    .SetContentText (CommonStrings.StrNewVideos)
+                    .SetSmallIcon (Resource.Drawable.Notification)
+                    .SetAutoCancel(true);
+
+            Notification notification = builder.Build();
+
+            NotificationManager notificationManager =
+                cont.GetSystemService (Context.NotificationService) as NotificationManager;
+
+            const int notificationId = 0;
+            notificationManager.Notify (notificationId, notification);
+        }
 	}
 }
 

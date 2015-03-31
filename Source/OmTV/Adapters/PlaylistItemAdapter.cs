@@ -1,28 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using Google.Apis.YouTube.v3.Data;
-using System.Threading;
-using System.Threading.Tasks;
+using Android.Views;
 
 namespace OmTV
 {
-	public class PlaylistItemAdapter:BaseAdapter
+	public class PlaylistitemAdapter:BaseAdapter
 	{
 		private Android.App.Activity _activity;
-		public List<Playlist> Items{ get; set; }
+		public PlaylistitemCollection Items{ get; set; }
 
-		public PlaylistItemAdapter(Android.App.Activity activity, List<Playlist> items)
+        public PlaylistitemAdapter(Android.App.Activity activity, PlaylistitemCollection collection)
 		{
 			_activity = activity;
-			Items = items;
+			Items = collection;
 		}
 
 		#region implemented abstract members of BaseAdapter
@@ -39,17 +28,25 @@ namespace OmTV
             View view = _activity.LayoutInflater.Inflate(Resource.Layout.PlaylistItem, parent, false);
             var item = Items[position];
 
+            if (!string.IsNullOrEmpty(item.ContentDetails.ETag))
+            {
+                var layout = view.FindViewById<LinearLayout>(Resource.Id.layoutPlaylistitem);
+                layout.Background = 
+                    new Android.Graphics.Drawables.ColorDrawable(Android.Graphics.Color.Argb(255,40,40,40));
+            }
+
             var textTitle = view.FindViewById<TextView>(Resource.Id.tViewTitle);
-            textTitle.Text = string.Format("{0}\n{1} відео",
+            textTitle.Text = string.Format("{0}. {1}\n{2}", 
+                                           position + 1,
                                            item.Snippet.Title,
-                                           item.ContentDetails.ItemCount.Value);
+                                           item.Snippet.PublishedAt.Value.ToString());
 
             var tViewNewCnt = view.FindViewById<TextView>(Resource.Id.tViewNewCnt);
             tViewNewCnt.Text = string.Format("{0}", item.ContentDetails.ETag);
 
             var image = view.FindViewById(Resource.Id.iView) as ImageView;
             image.SetImageBitmap(CommonVoids.GetBitmapFromUrl(item.Snippet.Thumbnails.Default.Url.ToString()));
-
+		
             return view;
         }
 
@@ -61,6 +58,5 @@ namespace OmTV
             }
         }
 		#endregion
-    }
+	}
 }
-

@@ -1,37 +1,39 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using Google.Apis.YouTube.v3.Data;
+using Android.OS;
+using Android.Content;
 
 namespace OmTV
 {
 	[Activity (Label = "OmTV")]			
 	public class VideosActivity : Android.App.Activity
 	{
-		private ListView lViewPlaylistItemCollection;
+		private ListView lViewCollection;
 		private AlertDialog dlg;
-		private string playListId;		
+        private PlaylistitemCollection items;		
 
 		protected override void OnCreate (Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.VideosContainer);
 
-            playListId = Intent.GetStringExtra(CommonStrings.StrContent);
+            items = PlaylistitemCollection.CreateNewInstance(
+                Intent.GetStringExtra(CommonStrings.StrContent));
+            items.DataChanged += delegate
+            {
+                RunOnUiThread(delegate
+                {
+                    (lViewCollection.Adapter as BaseAdapter).NotifyDataSetChanged();
+                });
+            };
+
             dlg = CommonVoids.InitLoadingDialog(this);
 
-            lViewPlaylistItemCollection = FindViewById<ListView>(Resource.Id.lViewPlaylist);
-            lViewPlaylistItemCollection.ItemClick += (obj, arg) =>
+            lViewCollection = FindViewById<ListView>(Resource.Id.lViewPlaylist);
+            lViewCollection.Adapter = new PlaylistitemAdapter(this, items);
+            lViewCollection.ItemClick += (obj, arg) =>
             {
-                string itemId = ((obj as ListView).Adapter as VideoItemAdapter).Items[arg.Position].Snippet.ResourceId.VideoId;
-                CommonVoids.PlayVideo(this, itemId);
+                CommonVoids.PlayVideo(this, items [arg.Position].Snippet.ResourceId.VideoId);
             };
 
             var container = FindViewById<FlyOutContainer>(Resource.Id.FlyOutContainer);
@@ -45,27 +47,40 @@ namespace OmTV
                 container.AnimatedOpened = !container.AnimatedOpened;
             };
 
-
             var btnExit = container.FindViewById<LinearLayout>(Resource.Id.layoutExit);
             btnExit.Click += delegate
             {
-                CommonVoids.ExitApp();
+                this.Finish();
             };
 
-            var writeMeBtn = FindViewById(Resource.Id.writeMeBtn);
-            writeMeBtn.Click += delegate
+            var btnWriteLetter = FindViewById(Resource.Id.writeMeBtn);
+            btnWriteLetter.Click += delegate
             {
                 CommonVoids.WriteLetter(this);
+            };
+
+            var btnAbout = FindViewById(Resource.Id.aboutBtn);
+            btnAbout.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(About));
+                intent.SetFlags(ActivityFlags.NewTask);
+                StartActivity(intent);
             };
 
             var btnRefresh = FindViewById(Resource.Id.RefreshButton);
             btnRefresh.Click += (sender, e) =>
             {
-                YoutubeClient.LoadPlaylistItemCollectionAsync(playListId);
+                var res = PlaylistitemCollection.LoadInstance(items.PlaylistId);
+                if (res == null)
+                    items.GetDataAsync();
+                else
+                {
+                    items.Clear();
+                    items.AddRange(res);
+                    (lViewCollection.Adapter as BaseAdapter).NotifyDataSetChanged();
+                    items.UpdateDataAsync();          
+                }   
             };
-
-
-            //CommonEvents.RaiseNullEvents();
 
             CommonEvents.OnMessage += (obj, arg) =>
             {
@@ -74,26 +89,22 @@ namespace OmTV
                     Toast.MakeText(this, arg.Value, ToastLength.Short).Show();   
                 });
             };
-			
-            CommonEvents.OnPlaylistItemCollectionChanged += delegate
-            {
-                RunOnUiThread(delegate
-                {
-                    lViewPlaylistItemCollection.Adapter = new VideoItemAdapter(this, YoutubeClient.PlaylistItemCollection);
-                });
-            };
 
             CommonEvents.OnLoadStarted += delegate
             {
                 RunOnUiThread(delegate
-                {
+                {                   
+                    dlg.Show();
                     btnRefresh.StartAnimation(CommonVoids.InitRotateAnimation());
                 });
-            };		
+            };
 
             CommonEvents.OnLoadEnded += delegate
             {
-                btnRefresh.Animation = null;
+                RunOnUiThread(delegate {
+                    btnRefresh.Animation = null;
+                    dlg.Hide();   
+                });
             };
 			
             btnRefresh.CallOnClick();

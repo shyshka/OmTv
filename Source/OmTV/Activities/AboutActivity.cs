@@ -5,7 +5,6 @@ using Android.OS;
 using Android.Widget;
 using System.Threading;
 
-
 namespace OmTV
 {
 	[Activity (Label = "About")]			
@@ -52,7 +51,7 @@ namespace OmTV
             {
                 try
                 {
-                    var request = YoutubeClient.YouTubeServiceInstance.Channels.List(CommonStrings.StrSnippet);
+                    var request = YoutubeClient.Instance.Channels.List(CommonStrings.StrSnippet);
                     request.ForUsername = CommonStrings.UserName;
                     var response = request.Execute();
                     OnFinished(null, response.Items[0]);

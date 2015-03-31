@@ -87,10 +87,13 @@
     <Compile Include="Activities\AboutActivity.cs" />
     <Compile Include="Activities\FlyOutContainer.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Adapters\PlaylistItemAdapter.cs" />
-    <Compile Include="Adapters\VideoItemAdapter.cs" />
     <Compile Include="Activities\VideosActivity.cs" />
     <Compile Include="Core\CommonStrings.cs" />
+    <Compile Include="Adapters\PlaylistAdapter.cs" />
+    <Compile Include="Adapters\PlaylistitemAdapter.cs" />
+    <Compile Include="Core\PlaylistCollection.cs" />
+    <Compile Include="Core\PlaylistitemCollection.cs" />
+    <Compile Include="Core\OmTvService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -114,6 +117,7 @@
     <AndroidResource Include="Resources\drawable\About.png" />
     <AndroidResource Include="Resources\drawable\Exit.png" />
     <AndroidResource Include="Resources\drawable\Refresh.png" />
+    <AndroidResource Include="Resources\drawable\Notification.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup />
