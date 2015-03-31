@@ -13,29 +13,37 @@ namespace OmTV
 {
 	public static class CommonEvents
 	{
-		public static event EventHandler<string> OnMessage;
-
+		public static event EventHandler<StringEventArgs> OnMessage;
 		public static event EventHandler OnLoadStarted;
 		public static event EventHandler OnLoadEnded;
-		public static event EventHandler OnLstPlaylistsChanged;
-		public static event EventHandler OnLstPlaylistItemsChanged;
+		public static event EventHandler OnPlaylistCollectionChanged;
+        public static event EventHandler OnPlaylistItemCollectionChanged;
+
+        public class StringEventArgs : EventArgs
+        {
+            public string Value;
+            public StringEventArgs(string val)
+            {
+                Value = val;
+            }
+        }
 
 		public static void RaiseOnMessage(string msg)
 		{
 			if (OnMessage != null)
-				OnMessage (null, msg);
+				OnMessage (null, new StringEventArgs(msg));
 		}
 
 		public static void RaiseOnLstPlaylistsChanged()
 		{
-			if (OnLstPlaylistsChanged != null)
-				OnLstPlaylistsChanged (null, EventArgs.Empty);
+			if (OnPlaylistCollectionChanged != null)
+				OnPlaylistCollectionChanged (null, EventArgs.Empty);
 		}
 
-		public static void RaiseOnLstPlaylistItemsChanged()
+		public static void RaiseOnPlaylistItemCollectionChanged()
 		{
-			if (OnLstPlaylistItemsChanged != null)
-				OnLstPlaylistItemsChanged (null, EventArgs.Empty); 
+			if (OnPlaylistItemCollectionChanged != null)
+                OnPlaylistItemCollectionChanged (null, EventArgs.Empty); 
 		}
 
 		public static void RaiseOnLoadStarted()
@@ -54,8 +62,8 @@ namespace OmTV
 		{
 			OnLoadStarted = null;
 			OnLoadEnded = null;
-			OnLstPlaylistsChanged = null;
-			OnLstPlaylistItemsChanged = null;
+			OnPlaylistCollectionChanged = null;
+            OnPlaylistItemCollectionChanged = null;
 		}
 	}
 }
