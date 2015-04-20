@@ -14,7 +14,7 @@ namespace OmTV
 {
 	public static class CommonStrings
 	{				
-		public static readonly string ApiKeyOmTV = @"AIzaSyDFPzm4iSdU-JK9ykZVL1NMK6Iw73-E3C4";
+        public static readonly string ApiKeyOmTV = @"AIzaSyDtpfszHVJUH-G0NS0f6UgREjQVHfOdBbQ";
 		public static readonly string ChannelId = @"UCkp0Tc7ll67bChomTyB1ezQ";	
 		public static readonly string Email = @"shyshka.oleg@gmail.com";
 			

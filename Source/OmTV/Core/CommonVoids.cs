@@ -95,7 +95,7 @@ namespace OmTV
                     .SetSmallIcon (Resource.Drawable.Notification)
                     .SetAutoCancel(true);
 
-            Notification notification = builder.Build();
+            Notification notification = builder.Notification;
 
             NotificationManager notificationManager =
                 cont.GetSystemService (Context.NotificationService) as NotificationManager;

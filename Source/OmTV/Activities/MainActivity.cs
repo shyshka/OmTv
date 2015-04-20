@@ -111,7 +111,7 @@ namespace OmTV
                 });
             };           
 
-            btnRefresh.CallOnClick();           
+            btnRefresh.PerformClick();           
         }
 
 		protected override void OnResume ()

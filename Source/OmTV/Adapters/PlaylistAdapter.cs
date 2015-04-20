@@ -42,8 +42,7 @@ namespace OmTV
             if (!string.IsNullOrEmpty(item.ContentDetails.ETag))
             {
                 var layout = view.FindViewById<LinearLayout>(Resource.Id.layoutPlaylistitem);
-                layout.Background = 
-                    new Android.Graphics.Drawables.ColorDrawable(Android.Graphics.Color.Argb(255,40,40,40));
+                layout.SetBackgroundColor(Android.Graphics.Color.Argb(255,40,40,40));
             }
 
             var textTitle = view.FindViewById<TextView>(Resource.Id.tViewTitle);

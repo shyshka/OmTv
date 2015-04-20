@@ -107,7 +107,7 @@ namespace OmTV
                 });
             };
 			
-            btnRefresh.CallOnClick();
+            btnRefresh.PerformClick();
         }
 	}
 }
