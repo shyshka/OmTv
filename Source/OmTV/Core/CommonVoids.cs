@@ -35,9 +35,8 @@ namespace OmTV
 			Bitmap imageBitmap = null;
 			try
 			{
-				string fileName = System.IO.Path.Combine(Directory.GetParent(url).Name, System.IO.Path.GetFileName(url));
-				//string fileOutputPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), fileName);
-                string fileOutputPath = System.IO.Path.Combine(@"/mnt/sdcard/images/", fileName);
+				string fileName = System.IO.Path.Combine(Directory.GetParent(url).Name, System.IO.Path.GetFileName(url));				
+                string fileOutputPath =  System.IO.Path.Combine(CommonStrings.StrDataDirPath, fileName);
                 System.IO.Directory.CreateDirectory(System.IO.Directory.GetParent(fileOutputPath).FullName);
 
 				if (!File.Exists(fileOutputPath)) 
@@ -71,12 +70,9 @@ namespace OmTV
 			Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
 		}
 
-		public static RotateAnimation InitRotateAnimation()
+		public static Animation InitRotateAnimation(Context cont)
 		{
-			RotateAnimation anim = new RotateAnimation (0f, 350f, 15f, 15f);
-			anim.Interpolator = new LinearInterpolator ();
-			anim.RepeatCount = Animation.Infinite;
-			anim.Duration = 700;
+            var anim = AnimationUtils.LoadAnimation(cont, Resource.Animation.rotate_centre);           
 			return anim;
 		}
 

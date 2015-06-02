@@ -33,6 +33,9 @@ namespace OmTV
             lViewCollection.Adapter = new PlaylistitemAdapter(this, items);
             lViewCollection.ItemClick += (obj, arg) =>
             {
+                items[arg.Position].ContentDetails.ETag = string.Empty;
+                (lViewCollection.Adapter as BaseAdapter).NotifyDataSetChanged();
+                items.SaveData();
                 CommonVoids.PlayVideo(this, items [arg.Position].Snippet.ResourceId.VideoId);
             };
 
@@ -95,7 +98,7 @@ namespace OmTV
                 RunOnUiThread(delegate
                 {                   
                     dlg.Show();
-                    btnRefresh.StartAnimation(CommonVoids.InitRotateAnimation());
+                    btnRefresh.StartAnimation(CommonVoids.InitRotateAnimation(this));
                 });
             };
 

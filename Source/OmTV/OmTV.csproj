@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AssemblyName>OmTV</AssemblyName>
-    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <MandroidI18n />
@@ -32,6 +32,7 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -102,7 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\layout\PlaylistItem.axml" />
     <AndroidResource Include="Resources\layout\SlideMenu.axml" />
     <AndroidResource Include="Resources\layout\MainContainer.axml" />
     <AndroidResource Include="Resources\layout\MainActivity.axml" />
@@ -118,11 +118,14 @@
     <AndroidResource Include="Resources\drawable\Exit.png" />
     <AndroidResource Include="Resources\drawable\Refresh.png" />
     <AndroidResource Include="Resources\drawable\Notification.png" />
+    <AndroidResource Include="Resources\layout-small\PlaylistItem.axml" />
+    <AndroidResource Include="Resources\layout-normal\PlaylistItem.axml" />
+    <AndroidResource Include="Resources\layout-large\PlaylistItem.axml" />
+    <AndroidResource Include="Resources\layout\PlaylistItem.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Activities\" />
-    <Folder Include="Adapters\" />
+    <AndroidResource Include="Resources\anim\rotate_centre.xml" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

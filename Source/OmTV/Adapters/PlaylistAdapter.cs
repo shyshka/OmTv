@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OmTV
 {
-	public class PlaylistAdapter:BaseAdapter
+    public class PlaylistAdapter: BaseAdapter
 	{
 		private Android.App.Activity _activity;
         public PlaylistCollection Items{ get; set; }
@@ -41,7 +41,7 @@ namespace OmTV
 
             if (!string.IsNullOrEmpty(item.ContentDetails.ETag))
             {
-                var layout = view.FindViewById<LinearLayout>(Resource.Id.layoutPlaylistitem);
+                var layout = view.FindViewById<RelativeLayout>(Resource.Id.layoutPlaylistitem);
                 layout.SetBackgroundColor(Android.Graphics.Color.Argb(255,40,40,40));
             }
 
@@ -55,7 +55,7 @@ namespace OmTV
             tViewNewCnt.Text = string.Format("{0}", item.ContentDetails.ETag);
 
             var image = view.FindViewById(Resource.Id.iView) as ImageView;
-            image.SetImageBitmap(CommonVoids.GetBitmapFromUrl(item.Snippet.Thumbnails.Default.Url.ToString()));
+            image.SetImageBitmap(CommonVoids.GetBitmapFromUrl(item.Snippet.Thumbnails.Medium.Url.ToString()));
 
             return view;
         }

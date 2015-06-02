@@ -83,8 +83,6 @@ namespace OmTV
                 StartActivity(intent);
             };
 
-            //CommonEvents.RaiseNullEvents();
-
             CommonEvents.OnMessage += (obj, arg) =>
             {
                 RunOnUiThread(delegate
@@ -98,7 +96,7 @@ namespace OmTV
                 RunOnUiThread(delegate
                 {
                     dlg.Show();
-                    btnRefresh.StartAnimation(CommonVoids.InitRotateAnimation());	
+                    btnRefresh.StartAnimation(CommonVoids.InitRotateAnimation(this));	
                 });
             };	
 

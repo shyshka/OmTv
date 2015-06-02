@@ -115,7 +115,7 @@ namespace OmTV
             return res;
         }
 
-        private void SaveData()
+        public void SaveData()
         {
             string filePath = Path.Combine(CommonStrings.StrDataDirPath, PlaylistId);
             string json = JsonConvert.SerializeObject(this as List<PlaylistItem>);

@@ -48,9 +48,9 @@ namespace OmTV
                     SaveData(); 
                     CommonEvents.RaiseOnMessage(CommonStrings.StrUpdate);                           
                 }
-                catch
+                catch (Exception ex)
                 {
-                    CommonEvents.RaiseOnMessage(CommonStrings.StrErrorInternet);
+                    CommonEvents.RaiseOnMessage(string.Format("{0}\n{1}", CommonStrings.StrErrorInternet, ex.Message));
                     return;
                 }
                 finally
@@ -89,9 +89,9 @@ namespace OmTV
                     nextPageToken = listResponse.NextPageToken;
                 }                    
             }
-            catch
-            {                    
-                CommonEvents.RaiseOnMessage(CommonStrings.StrErrorInternet);
+            catch (Exception ex)
+            {
+                CommonEvents.RaiseOnMessage(string.Format("{0}\n{1}", CommonStrings.StrErrorInternet, ex.Message));
                 return null;
             }
             finally
@@ -140,15 +140,15 @@ namespace OmTV
         private void SaveData()
         {
             string json = JsonConvert.SerializeObject(this as List<Playlist>);
-            Directory.CreateDirectory(Directory.GetParent(CommonStrings.StrPlaylistDataFilePath).FullName);
-            File.WriteAllText(CommonStrings.StrPlaylistDataFilePath, json);
-        }         
+            Directory.CreateDirectory(Directory.GetParent(CommonStrings.StrDataDirPath).FullName);
+            File.WriteAllText(Path.Combine(CommonStrings.StrDataDirPath, "playlists.json"), json);
+        }
             
         public static List<Playlist> LoadInstance()
         {
-            if (!File.Exists(CommonStrings.StrPlaylistDataFilePath))
+            if (!File.Exists(Path.Combine(CommonStrings.StrDataDirPath, "playlists.json")))
                 return null;                     
-            string json = File.ReadAllText(CommonStrings.StrPlaylistDataFilePath);
+            string json = File.ReadAllText(Path.Combine(CommonStrings.StrDataDirPath, "playlists.json"));
             return JsonConvert.DeserializeObject(json, typeof(List<Playlist>)) as List<Playlist>;
         }
 

@@ -28,23 +28,29 @@
                 android:layout_marginLeft="8dp" />
         </LinearLayout>
     </FrameLayout>
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:minWidth="25px"
         android:minHeight="25px"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:background="#ff000000">
-        <ImageView
-            android:src="@drawable/Icon"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/iViewAbout" />
-        <TextView
-            android:text="Завантаження..."
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tViewAbout" />
-    </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ff000000">
+            <ImageView
+                android:src="@drawable/Icon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/iViewAbout" />
+            <TextView
+                android:text="Завантаження..."
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tViewAbout" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
